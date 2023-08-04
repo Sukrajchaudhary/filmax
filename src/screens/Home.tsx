@@ -7,7 +7,11 @@ function Home() {
   console.log(data);
   return (
     <div>
-      {isLoading && <h2>.....Loading</h2>}
+      {isLoading && (
+        <div className="text-center">
+          <span className="loading loading-spinner text-red-800 text-9xl"></span>
+        </div>
+      )}
       {error && <h2>Can't get data.Something went wront</h2>}
 
       {isSuccess && (
