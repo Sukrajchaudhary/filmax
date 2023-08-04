@@ -21,3 +21,12 @@ export interface Results {
   vote_average: number;
   vote_count: number;
 }
+
+export interface genreProps {
+  genres: Genres[];
+}
+
+export interface Genres {
+  id: number;
+  name: string;
+}

@@ -1,47 +1,21 @@
+import { useGetgenresQuery } from "../services/TMDB";
+import { Genres } from "../types/moviesapitypes";
+// import { genreIcons } from "../assets/genres";
+import genreIcons from "../assets/genres";
+
+interface categoriesProps {
+  label: string;
+  value: string;
+}
+
 function Sidebar() {
-  //   const n = 50; // Or something else
+  const { data, isFetching } = useGetgenresQuery();
   const categories = [
     { label: "Popular", value: "popular" },
-    { label: "Top Rated", value: "top_rated" },
+    { label: "Top Rated", value: "topRated" },
     { label: "Upcoming", value: "upcoming" },
   ];
 
-  const genres = [
-    "Pop",
-    "Rock",
-    "Hip Hop",
-    "Jazz",
-    "Country",
-    "R&B",
-    "Electronic",
-    "Classical",
-    "Blues",
-    "Reggae",
-    "Folk",
-    "Metal",
-    "Punk",
-    "Indie",
-    "Dance",
-    "Funk",
-    "Soul",
-    "Gospel",
-    "Latin",
-    "World",
-    "Alternative",
-    "Grunge",
-    "EDM",
-    "Techno",
-    "House",
-    "Disco",
-    "Rap",
-    "Trap",
-    "Ska",
-    "Funk",
-    "Ambient",
-    "Chillout",
-    "Instrumental",
-    "Acoustic",
-  ];
   return (
     <div className="h-full z-50">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -80,11 +54,15 @@ function Sidebar() {
           <div className="divider" />
 
           <div>
-            <p className="">Categories</p>
+            <p className="text-lg">Categories</p>
             <li className="mt-3">
-              {categories.map((cat) => (
-                <a href="/" className="p-4" key={cat.value}>
-                  {cat.label}
+              {categories.map(({ label, value }: categoriesProps) => (
+                <a href="/" className="p-4 gap-6" key={value}>
+                  <img
+                    src={genreIcons[label.toLowerCase()]}
+                    className=" h-10 invert "
+                  />
+                  <span className="text-white">{label}</span>
                 </a>
               ))}
             </li>
@@ -93,13 +71,23 @@ function Sidebar() {
           <div className="divider" />
 
           <div>
-            <p className="">Genres</p>
+            <p className="text-lg">Genres</p>
             <li className="mt-3">
-              {genres.map((gen, i) => (
-                <a href="/" className="p-4" key={i}>
-                  {gen}
-                </a>
-              ))}
+              {isFetching ? (
+                <div className="text-center">
+                  <span className="loading loading-spinner text-red-800 text-9xl"></span>
+                </div>
+              ) : (
+                data?.genres.map(({ name, id }: Genres) => (
+                  <a href="/" className="p-4 gap-6" key={id}>
+                    <img
+                      src={genreIcons[name.toLowerCase()]}
+                      className=" h-10 invert"
+                    />
+                    <span className="text-white">{name}</span>
+                  </a>
+                ))
+              )}
             </li>
           </div>
         </ul>

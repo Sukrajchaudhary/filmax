@@ -4,7 +4,6 @@ import { useGetMoviesQuery } from "../services/TMDB";
 
 function Home() {
   const { data, isLoading, isSuccess, error } = useGetMoviesQuery();
-  console.log(data);
   return (
     <div>
       {isLoading && (
