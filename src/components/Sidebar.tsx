@@ -59,6 +59,7 @@ function Sidebar() {
               {categories.map(({ label, value }: categoriesProps) => (
                 <a href="/" className="p-4 gap-6" key={value}>
                   <img
+                    //  src={genreIcons.action}
                     src={genreIcons[label.toLowerCase()]}
                     className=" h-10 invert "
                   />
@@ -81,6 +82,7 @@ function Sidebar() {
                 data?.genres.map(({ name, id }: Genres) => (
                   <a href="/" className="p-4 gap-6" key={id}>
                     <img
+                      // src={genreIcons.fantasy}
                       src={genreIcons[name.toLowerCase()]}
                       className=" h-10 invert"
                     />
