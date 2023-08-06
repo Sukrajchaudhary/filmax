@@ -19,7 +19,7 @@ function Home() {
       {error && <h2>Can't get data.Something went wront</h2>}
       {isFetching || isLoading ? (
         <div className="text-center">
-          <span className="loading loading-spinner w-24 text-primary"></span>
+          <span className="loading loading-spinner w-24 text-red-500"></span>
         </div>
       ) : (
         <div>
