@@ -5,7 +5,6 @@ import Home from "./screens/Home";
 import Actors from "./screens/Actors";
 import Movie from "./screens/Movie";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +28,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      <main className="p-5">
+      <main className="my-12 ml-8">
         <RouterProvider router={router} />
       </main>
     </div>

@@ -1,21 +1,26 @@
 import { useGetgenresQuery } from "../services/TMDB";
 import { Genres } from "../types/moviesapitypes";
-// import { genreIcons } from "../assets/genres";
 import genreIcons from "../assets/genres";
+import { useDispatch } from "react-redux";
+import { selectGenreOrCategory } from "../features/currentGenreOrCategory";
 
 interface categoriesProps {
   label: string;
   value: string;
 }
 
+const categories = [
+  { label: "Popular", value: "popular" },
+  { label: "Top Rated", value: "top_rated" },
+  { label: "Upcoming", value: "upcoming" },
+];
+
 function Sidebar() {
   const { data, isFetching } = useGetgenresQuery();
-  const categories = [
-    { label: "Popular", value: "popular" },
-    { label: "Top Rated", value: "topRated" },
-    { label: "Upcoming", value: "upcoming" },
-  ];
-
+  const dispatch = useDispatch();
+  // const { genreIdOrCategoryName } = useSelector(
+  //   (state) => state.currentGenreOrCategory
+  // );
   return (
     <div className="h-full z-50">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -57,7 +62,12 @@ function Sidebar() {
             <p className="text-lg">Categories</p>
             <li className="mt-3">
               {categories.map(({ label, value }: categoriesProps) => (
-                <a href="/" className="p-4 gap-6" key={value}>
+                <a
+                  // href="/"
+                  className="p-4 gap-6"
+                  key={value}
+                  onClick={() => dispatch(selectGenreOrCategory(value))}
+                >
                   <img
                     //  src={genreIcons.action}
                     src={genreIcons[label.toLowerCase()]}
@@ -80,9 +90,12 @@ function Sidebar() {
                 </div>
               ) : (
                 data?.genres.map(({ name, id }: Genres) => (
-                  <a href="/" className="p-4 gap-6" key={id}>
+                  <a
+                    className="p-4 gap-6"
+                    key={id}
+                    onClick={() => dispatch(selectGenreOrCategory(id))}
+                  >
                     <img
-                      // src={genreIcons.fantasy}
                       src={genreIcons[name.toLowerCase()]}
                       className=" h-10 invert"
                     />

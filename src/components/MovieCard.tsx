@@ -9,7 +9,7 @@ interface MovieProps {
 export default function MovieCard({ movie, i }: MovieProps) {
   return (
     <div
-      className="card w-64 bg-base-300  shadow-2xl hover:cursor-pointer hover:scale-95"
+      className="card w-64 bg-base-300 shadow-3xl hover:cursor-pointer hover:transition hover:duration-300 hover:scale-105"
       key={i}
     >
       <figure>
@@ -17,7 +17,7 @@ export default function MovieCard({ movie, i }: MovieProps) {
           src={`${
             movie.poster_path
               ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-              : `https://www.fillmurray.com/200/300`
+              : `/public/dummy_image.webp`
           }`}
           className="h-full w-full"
           alt={movie.title}
