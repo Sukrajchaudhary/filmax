@@ -9,23 +9,20 @@ function Home() {
   // const { genreIdOrCategoryName } = useSelector(
   //   (state) => state.currentGenreOrCategory
   // );
-  const { data, isLoading, isSuccess, error } = useGetMoviesQuery({
+  const { data, isLoading, isFetching, error } = useGetMoviesQuery({
     genreIdOrCategoryName: "popular",
     page: page,
   });
-  console.log(page);
-
+  console.log(data);
   return (
     <div>
-      {isLoading && (
-        <div className="text-center">
-          <span className="loading loading-spinner text-red-800 text-9xl"></span>
-        </div>
-      )}
       {error && <h2>Can't get data.Something went wront</h2>}
-
-      {isSuccess && (
-        <>
+      {isFetching || isLoading ? (
+        <div className="text-center">
+          <span className="loading loading-spinner w-24 text-primary"></span>
+        </div>
+      ) : (
+        <div>
           <div>
             <MovieList movies={data} />
           </div>
@@ -47,7 +44,7 @@ function Home() {
               Next
             </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
