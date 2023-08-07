@@ -18,9 +18,6 @@ const categories = [
 function Sidebar() {
   const { data, isFetching } = useGetgenresQuery();
   const dispatch = useDispatch();
-  // const { genreIdOrCategoryName } = useSelector(
-  //   (state) => state.currentGenreOrCategory
-  // );
   return (
     <div className="h-full z-50">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -63,13 +60,11 @@ function Sidebar() {
             <li className="mt-3">
               {categories.map(({ label, value }: categoriesProps) => (
                 <a
-                  // href="/"
                   className="p-4 gap-6"
                   key={value}
                   onClick={() => dispatch(selectGenreOrCategory(value))}
                 >
                   <img
-                    //  src={genreIcons.action}
                     src={genreIcons[label.toLowerCase()]}
                     className=" h-10 invert "
                   />

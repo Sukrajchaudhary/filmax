@@ -24,6 +24,6 @@ export interface Genres {
 
 export interface getMoviesQueryTypes {
   genreIdOrCategoryName: number | "popular" | "top_rated" | "upcoming";
-
   page: number;
+  searchQuery: string;
 }

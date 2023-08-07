@@ -1,51 +1,59 @@
 import MovieList from "../components/MovieList";
 import { useGetMoviesQuery } from "../services/TMDB";
-// import { useSelector } from "react-redux";
-// import { selectGenreOrCategory } from "../features/currentGenreOrCategory";
-import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import Pagination from "../components/Pagination";
 
 function Home() {
-  const [page, setPage] = useState(1);
-  // const { genreIdOrCategoryName } = useSelector(
-  //   (state) => state.currentGenreOrCategory
-  // );
+  const { genreIdOrCategoryName, searchQuery, page } = useSelector(
+    (state: any) => state.currentGenreOrCategory
+  );
+  const [currentPage, setCurrentPage] = useState(page);
+
+  useEffect(() => {
+    setCurrentPage(page);
+  }, [page]);
+
+  // console.log(page, genreIdOrCategoryName, searchQuery);
   const { data, isLoading, isFetching, error } = useGetMoviesQuery({
-    genreIdOrCategoryName: "popular",
-    page: page,
+    genreIdOrCategoryName,
+    page: currentPage,
+    searchQuery,
   });
-  console.log(data);
+
+  const totalpages = data?.total_pages || 0;
+
+  if (isFetching || isLoading) {
+    return (
+      <div className="text-center">
+        <span className="loading loading-spinner w-24 text-red-500"></span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <h2>Can't get data.Something went wrong</h2>;
+  }
+
+  if (!data?.results.length) {
+    return (
+      <div>
+        <h1>Movies not found by that name</h1>
+      </div>
+    );
+  }
+
   return (
     <div>
-      {error && <h2>Can't get data.Something went wront</h2>}
-      {isFetching || isLoading ? (
-        <div className="text-center">
-          <span className="loading loading-spinner w-24 text-red-500"></span>
-        </div>
-      ) : (
-        <div>
-          <div>
-            <MovieList movies={data} />
-          </div>
+      <div>
+        <MovieList movies={data} />
+      </div>
 
-          <div className="text-center space-x-6 mt-6 mr-4">
-            {page > 1 && (
-              <button
-                className="bg-red-500 p-4 rounded-2xl text-white"
-                onClick={() => setPage(page - 1)}
-              >
-                Prev
-              </button>
-            )}
-            <span className=" text-xl">{page}</span>
-            <button
-              className="bg-red-500 p-4 rounded-2xl text-white"
-              onClick={() => setPage(page + 1)}
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
+      <Pagination
+        currentPage={currentPage}
+        setPage={setCurrentPage}
+        totalPages={totalpages}
+      />
     </div>
   );
 }

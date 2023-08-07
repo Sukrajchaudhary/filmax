@@ -7,6 +7,7 @@ interface MovieProps {
 }
 
 export default function MovieCard({ movie, i }: MovieProps) {
+  const rating_score: number = parseFloat((movie.vote_average / 2).toFixed(2));
   return (
     <div
       className="card w-64 bg-base-300 shadow-3xl hover:cursor-pointer hover:transition hover:duration-300 hover:scale-105"
@@ -30,12 +31,9 @@ export default function MovieCard({ movie, i }: MovieProps) {
 
         {/* Rating */}
         <div className="flex gap-3">
-          <span>{movie.vote_average / 2}</span>
-          <ReactStars value={movie.vote_average / 2} activeColor="red" />
+          <span>{rating_score}</span>
+          <ReactStars value={rating_score} activeColor="red" count={5} />
         </div>
-        {/* <div className="card-actions justify-center">
-            <button className="btn btn-primary">Buy Now</button>
-          </div> */}
       </div>
     </div>
   );

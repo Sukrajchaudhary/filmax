@@ -1,6 +1,7 @@
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { MdBrightness7 } from "react-icons/md";
 import Sidebar from "./Sidebar";
+import Search from "./Search";
 
 function Navbar() {
   return (
@@ -21,11 +22,7 @@ function Navbar() {
         </div>
 
         <div className="form-control navbar-center">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-bordered w-48 md:w-auto focus:outline-none focus:border-red-500"
-          />
+          <Search />
         </div>
 
         <div className="navbar-end md:gap-4">

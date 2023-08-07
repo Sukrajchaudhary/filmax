@@ -19,9 +19,16 @@ const genreOrCategory = createSlice({
     selectGenreOrCategory: (state, action) => {
       state.genreIdOrCategoryName = action.payload;
     },
+    searchMovie: (state, action) => {
+      state.searchQuery = action.payload;
+    },
+    resetPaging: (state, action) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { selectGenreOrCategory } = genreOrCategory.actions;
+export const { selectGenreOrCategory, searchMovie, resetPaging } =
+  genreOrCategory.actions;
 
 export default genreOrCategory.reducer;
