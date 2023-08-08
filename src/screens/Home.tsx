@@ -46,7 +46,7 @@ function Home() {
   return (
     <div>
       <div>
-        <MovieList movies={data} />
+        <MovieList movies={data} numofmovies={18} />
       </div>
 
       <Pagination

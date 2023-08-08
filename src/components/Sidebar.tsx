@@ -4,6 +4,8 @@ import genreIcons from "../assets/genres";
 import { useDispatch } from "react-redux";
 import { selectGenreOrCategory } from "../features/currentGenreOrCategory";
 
+// import { useEffect, useState } from "react";
+
 interface categoriesProps {
   label: string;
   value: string;
@@ -16,12 +18,19 @@ const categories = [
 ];
 
 function Sidebar() {
-  const { data, isFetching } = useGetgenresQuery();
+  // const localTheme = localStorage.getItem("theme");
+  // const [theme, setTheme] = useState(localTheme ? localTheme : "light");
+  // useEffect(() => {
+  //   // setTheme(localTheme);
+  //   console.log(localTheme);
+  // }, [localTheme]);
+
+  const { data, isFetching, error } = useGetgenresQuery();
   const dispatch = useDispatch();
   return (
     <div className="h-full z-50">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      <div className="drawer-content ">
         {/* Page content here */}
         <button className="">
           <label htmlFor="my-drawer" className="btn btn-ghost btn-circle">
@@ -66,9 +75,10 @@ function Sidebar() {
                 >
                   <img
                     src={genreIcons[label.toLowerCase()]}
-                    className=" h-10 invert "
+                    // className={`h-10 ${storedData === "dark" ? "invert" : ""}`}
+                    className="h-10"
                   />
-                  <span className="text-white">{label}</span>
+                  <span className="text-lg">{label}</span>
                 </a>
               ))}
             </li>
@@ -78,6 +88,11 @@ function Sidebar() {
 
           <div>
             <p className="text-lg">Genres</p>
+            {error && (
+              <div className="h-full">
+                <h1>Can't get data</h1>
+              </div>
+            )}
             <li className="mt-3">
               {isFetching ? (
                 <div className="text-center">
@@ -92,9 +107,10 @@ function Sidebar() {
                   >
                     <img
                       src={genreIcons[name.toLowerCase()]}
-                      className=" h-10 invert"
+                      className="h-10"
+                      // className={`h-10 ${theme === "dark" ? "invert" : ""}`}
                     />
-                    <span className="text-white">{name}</span>
+                    <span className="text-lg">{name}</span>
                   </a>
                 ))
               )}

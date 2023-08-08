@@ -24,7 +24,7 @@ function Pagination({ currentPage, setPage, totalPages }: PaginationProps) {
 
   if (totalPages === 0) return null;
   return (
-    <div className="mt-6 text-center">
+    <div className="mt-10 text-center">
       <div className="join inline-block ">
         {currentPage > 1 && (
           <button
