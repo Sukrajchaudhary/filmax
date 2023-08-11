@@ -28,7 +28,7 @@ function Pagination({ currentPage, setPage, totalPages }: PaginationProps) {
       <div className="join inline-block ">
         {currentPage > 1 && (
           <button
-            className="join-item btn btn-outline w-20 font-black hover:bg-red-500 hover:text-white"
+            className="join-item btn btn-outline w-20 hover:bg-red-500 hover:text-white"
             onClick={prevPage}
           >
             Prev

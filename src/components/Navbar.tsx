@@ -2,28 +2,11 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 
 import Sidebar from "./Sidebar";
 import Search from "./Search";
-import { useEffect, useState } from "react";
+import { ThemeContext } from "../utils/ToggleColorMode";
+import { useContext } from "react";
 
 function Navbar() {
-  const [theme, setTheme] = useState<any>(
-    localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
-  );
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
-    document
-      .querySelector("html")
-      ?.setAttribute("data-theme", localTheme || "light");
-  }, [theme]);
-
-  const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
+  const colorMode = useContext(ThemeContext);
   return (
     <div className=" bg-base-100 shadow-lg overflow-hidden">
       <div className="navbar md:px-12">
@@ -51,8 +34,8 @@ function Navbar() {
             {/* this hidden checkbox controls the state */}
             <input
               type="checkbox"
-              onChange={handleToggle}
-              checked={theme === "dark"}
+              onChange={colorMode?.handleToggle}
+              checked={colorMode?.theme == "dark"}
             />
 
             {/* sun icon */}

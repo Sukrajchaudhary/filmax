@@ -3,8 +3,8 @@ import { Genres } from "../types/moviesapitypes";
 import genreIcons from "../assets/genres";
 import { useDispatch } from "react-redux";
 import { selectGenreOrCategory } from "../features/currentGenreOrCategory";
-
-// import { useEffect, useState } from "react";
+import { ThemeContext } from "../utils/ToggleColorMode";
+import { useContext } from "react";
 
 interface categoriesProps {
   label: string;
@@ -18,13 +18,7 @@ const categories = [
 ];
 
 function Sidebar() {
-  // const localTheme = localStorage.getItem("theme");
-  // const [theme, setTheme] = useState(localTheme ? localTheme : "light");
-  // useEffect(() => {
-  //   // setTheme(localTheme);
-  //   console.log(localTheme);
-  // }, [localTheme]);
-
+  const colorMode = useContext(ThemeContext);
   const { data, isFetching, error } = useGetgenresQuery();
   const dispatch = useDispatch();
   return (
@@ -75,8 +69,9 @@ function Sidebar() {
                 >
                   <img
                     src={genreIcons[label.toLowerCase()]}
-                    // className={`h-10 ${storedData === "dark" ? "invert" : ""}`}
-                    className="h-10"
+                    className={`h-10 ${
+                      colorMode?.theme === "dark" ? "invert" : ""
+                    }`}
                   />
                   <span className="text-lg">{label}</span>
                 </a>
@@ -107,8 +102,9 @@ function Sidebar() {
                   >
                     <img
                       src={genreIcons[name.toLowerCase()]}
-                      className="h-10"
-                      // className={`h-10 ${theme === "dark" ? "invert" : ""}`}
+                      className={`h-10 ${
+                        colorMode?.theme === "dark" ? "invert" : ""
+                      }`}
                     />
                     <span className="text-lg">{name}</span>
                   </a>
