@@ -18,7 +18,7 @@ export default function MovieCard({ movie, i }: MovieProps) {
           src={`${
             movie.poster_path
               ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-              : `/public/dummy_image.webp`
+              : `/dummy_image.webp`
           }`}
           className="h-full w-full"
           alt={movie.title}
