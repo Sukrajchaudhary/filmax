@@ -1,5 +1,4 @@
 ## Filmy website using Vite, React, Tailwind and Redux toolkit.
 
-## Site hosted on vercel
+## Site hosted on github page
 
-https://filmaxy.vercel.app/
