@@ -5,7 +5,7 @@ import {
   getMoviesQueryTypes,
 } from "../types/moviesapitypes";
 
-const tmdbApiKey = import.meta.env.VITE_TMDB_API_KEY;
+const tmdbApiKey = "9aa9a310df4f32fa49aee08a15a04115";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 export const tmdbApi = createApi({
